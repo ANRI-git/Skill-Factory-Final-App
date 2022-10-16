@@ -15,4 +15,4 @@ calendarApi.interceptors.request.use((config) => {
   return config;
 });
 
-export default calendarApi;
+export default valorantApi;

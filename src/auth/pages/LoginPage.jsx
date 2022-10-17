@@ -1,7 +1,7 @@
-import { Button, Grid, TextField, Typography } from '@mui/material';
+import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useForm } from '../../hooks/useForm';
 import { AuthLayout } from '../layout/AuthLayout';
 import { Google } from '@mui/icons-material';
@@ -16,7 +16,6 @@ const initialForm = {
 };
 
 export const LoginPage = () => {
-  const [isSubmit, setIsSubmit] = useState(false);
   const { status } = useSelector((state) => state.auth);
   const isChecking = useMemo(() => status === 'checking', [status]);
 
@@ -26,8 +25,6 @@ export const LoginPage = () => {
 
   const handleOnSubmit = (event) => {
     event.preventDefault();
-    setIsSubmit(true);
-    if (!isFormValid) return;
     dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
@@ -87,7 +84,7 @@ export const LoginPage = () => {
           </Grid>
         </Grid>
         <Grid container direction='row' justifyContent='end'>
-          <Link color='inherit' to='/auth/register'>
+          <Link component={RouterLink} color='inherit' to='/auth/register'>
             Crear una cuenta
           </Link>
         </Grid>

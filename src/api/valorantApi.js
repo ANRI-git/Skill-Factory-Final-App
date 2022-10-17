@@ -1,18 +1,10 @@
 import axios from 'axios';
-import { getEnvVariables } from '../helpers/getEnvVariables';
+import { getEnviroment } from '../agents/helpers/getEnviroment';
 
-const { VITE_API_URL } = getEnvVariables();
+const { VITE_API_URL } = getEnviroment();
 
-const calendarApi = axios.create({
+const valorantApi = axios.create({
   baseURL: VITE_API_URL,
-});
-
-calendarApi.interceptors.request.use((config) => {
-  config.headers = {
-    ...config.headers,
-    'x-token': JSON.parse(localStorage.getItem('user'))?.token,
-  };
-  return config;
 });
 
 export default valorantApi;
